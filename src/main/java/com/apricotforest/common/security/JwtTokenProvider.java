@@ -29,8 +29,7 @@ public class JwtTokenProvider {
             Claims claims = parseToken(secretKey, token);
             return new UsernamePasswordAuthenticationToken(claims, "", null);
         } catch (RequiredTypeException rte) {
-
-            throw new IllegalArgumentException("操作员信息格式错误", rte);
+            throw new IllegalArgumentException("parse error", rte);
         }
     }
 
@@ -56,9 +55,8 @@ public class JwtTokenProvider {
             Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
             return true;
         } catch (JwtException | IllegalArgumentException expected) {
-
-            logger.debug("jwt校验失败", expected);
-            throw new IllegalArgumentException("请重新登录", expected);
+            logger.error("jwt校验失败", expected);
+            throw new IllegalArgumentException("jwt校验失败", expected);
         }
     }
 
