@@ -9,6 +9,7 @@ import java.util.*;
  * @author smallAttr
  * @since 2020-08-27 17:47
  */
+@Configuration
 @ConfigurationProperties(prefix = "security.jwt.token.config")
 public class JwtTokenConfig {
 
